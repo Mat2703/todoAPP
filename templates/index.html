@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>ToDo List</h1>
+    <form method="post">
+        <input type="text" name="item" placeholder="Add new item">
+        <button type="submit">Add Item</button>
+    </form>
+
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {{ task.title }} - {% if task.completed %}Completed{% else %}Not Completed{% endif %}
+                <!-- Button to mark task as completed -->
+                <form method="post" action="{{ url_for('complete_task', task_id=task.id) }}" style="display:inline;">
+                    <button type="submit">Complete</button>
+                </form>
+                <!-- Button to delete task -->
+                <form method="post" action="{{ url_for('delete_task', task_id=task.id) }}" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
