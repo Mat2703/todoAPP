@@ -1,3 +1,17 @@
-body {
-    font-family: Arial, sans-serif;
+/* Assuming this is within 'style.css' */
+.image{
+    width:10%;
+    margin: auto;
+    text-align: center;
+}
+.container {
+    width:80%;
+    margin: auto; /* Centers the div horizontally */
+    text-align: center; /* Centers text and inline elements like forms and buttons */
+}
+
+.header-image {
+    max-width: 100%; /* Ensures the image is responsive and fits the container */
+    height: auto;
+    margin-bottom: 20px; /* Adds space below the image */
 }

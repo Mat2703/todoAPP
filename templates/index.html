@@ -7,27 +7,44 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>ToDo List</h1>
-    <form method="post">
-        <input type="text" name="item" placeholder="Add new item">
-        <button type="submit">Add Item</button>
-    </form>
+    <div class="image">
+        <img src="{{ url_for('static', filename='images/todo_list_logo.png.webp') }}" alt="ToDo List" class="header-image">
+    </div>
+    <div class="container">
+        <form method="post">
+            <input type="text" name="item" placeholder="Add new item">
+            <button type="submit">Add Item</button>
+        </form>
 
-    <ul>
-        {% for task in tasks %}
-            <li>
-                {{ task.title }} - {% if task.completed %}Completed{% else %}Not Completed{% endif %}
-                <!-- Button to mark task as completed -->
-                <form method="post" action="{{ url_for('complete_task', task_id=task.id) }}" style="display:inline;">
-                    <button type="submit">Complete</button>
-                </form>
-                <!-- Button to delete task -->
-                <form method="post" action="{{ url_for('delete_task', task_id=task.id) }}" style="display:inline;">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    {{ task.title }} - {% if task.completed %}Completed{% else %}Not Completed{% endif %}
+                    <!-- Button to mark task as completed -->
+                    <form method="post" action="{{ url_for('complete_task', task_id=task.id) }}" style="display:inline;">
+                        <button type="submit">Complete</button>
+                    </form>
+                    <!-- Button to delete task -->
+                    <form method="post" action="{{ url_for('delete_task', task_id=task.id) }}" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                    <!-- Button to edit task -->
+                    <button onclick="showEditForm({{ task.id }})">Edit Task</button>
+
+                    <!-- Hidden form for editing; initially not displayed -->
+                    <div id="editForm{{ task.id }}" style="display:none;">
+                        <form method="post" action="{{ url_for('edit_task', task_id=task.id) }}">
+                            <label for="name{{ task.id }}">Name:</label>
+                            <input type="text" id="name{{ task.id }}" name="name" value="{{ task.name }}" required><br>
+
+                            <button type="submit">Submit Changes</button>
+                            <button type="button" onclick="hideEditForm({{ task.id }})">Cancel</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </div>
 </body>
 </html>
