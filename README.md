@@ -1,7 +1,7 @@
 # ToDo List Application
 
 ## Introduction
-It's a simple todo app which user can add,delete,edit, complete tasks. It's not finished yet.
+It's a simple todo app which user can add,delete,edit, complete tasks. 
 
 ## Technologies
 List the technologies, languages, frameworks, and libraries used in the project.
